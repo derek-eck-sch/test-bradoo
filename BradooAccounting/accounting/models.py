@@ -13,6 +13,5 @@ class Expenses(models.Model):
     expensesBalance = models.FloatField()
 
 class Transactions(models.Model):
-    id = models.CharField()
-    type = models.CharField()
+    type = models.CharField(max_length=50)
     value = models.FloatField()
