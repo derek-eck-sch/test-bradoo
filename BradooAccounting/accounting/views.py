@@ -1,5 +1,5 @@
 from cgitb import html
-import datetime
+from pyexpat import model
 from django.shortcuts import render
 from django.http import HttpResponse
 from accounting.models import Liquidity
@@ -9,28 +9,87 @@ from accounting.models import Expenses
 
 # Create your views here.
 
-def index(request):    
-    now = datetime.datetime.now()
-    html = "<html><body>It is now %s.</body></html>" % now
+def index(request):
+    html = """<html>
+                <body> 
+                    <h2>Accounting</h2>
+                    <a href='/'>Home  </a>
+                    <a href='/liquidity/'>Liquidity  </a>
+                    <a href='/receivables/'>Receivables  </a>
+                    <a href='/revenue/'>Revenue  </a>
+                    <a href='/expenses/'>Expenses  </a> 
+                </body>
+            </html>"""
     return HttpResponse(html)
 
 def liquidity(request):
-    all_entries = Liquidity.objects.all()
-    html = "<html><body>%s</body></html>" % all_entries
+    model = Liquidity.objects.get(pk=1)
+    entries = model.liquidityBalance
+    html = """<html>
+                <body> 
+                    <h2>Accounting</h2>
+                    <a href='/'>Home  </a>
+                    <a href='/liquidity/'>Liquidity  </a>
+                    <a href='/receivables/'>Receivables  </a>
+                    <a href='/revenue/'>Revenue  </a>
+                    <a href='/expenses/'>Expenses  </a> 
+                    <br>
+                    <br> 
+                    %s
+                </body>
+            </html>""" % entries
     return HttpResponse(html)
 
 
 def receivables(request):
-    all_entries = Receivables.objects.all()
-    html = "<html><body>%s</body></html>" % all_entries
+    model = Receivables.objects.get(pk=1)
+    entries = model.receivablesBalance
+    html = """<html>
+                <body> 
+                    <h2>Accounting</h2>
+                    <a href='/'>Home  </a>
+                    <a href='/liquidity/'>Liquidity  </a>
+                    <a href='/receivables/'>Receivables  </a>
+                    <a href='/revenue/'>Revenue  </a>
+                    <a href='/expenses/'>Expenses  </a> 
+                    <br>
+                    <br> 
+                    %s
+                </body>
+            </html>""" % entries
     return HttpResponse(html)
 
 def revenue(request):
-    all_entries = Revenue.objects.all()   
-    html = "<html><body>%s</body></html>" % all_entries
+    model = Revenue.objects.get(pk=1)
+    entries = model.revenueBalance   
+    html = """<html>
+                <body> 
+                    <h2>Accounting</h2>
+                    <a href='/'>Home  </a>
+                    <a href='/liquidity/'>Liquidity  </a>
+                    <a href='/receivables/'>Receivables  </a>
+                    <a href='/revenue/'>Revenue  </a>
+                    <a href='/expenses/'>Expenses  </a> 
+                    <br>
+                    <br> 
+                    %s
+                </body>
+            </html>""" % entries
     return HttpResponse(html) 
 
 def expenses(request):
-    all_entries = Expenses.objects.all()
-    html = "<html><body>%s</body></html>" % all_entries
+    model = Expenses.objects.get(pk=1)
+    entries = model.expensesBalance
+    html = """<html>
+                <body>
+                    <a href='/'>Home  </a>
+                    <a href='/liquidity/'>Liquidity  </a>
+                    <a href='/receivables/'>Receivables  </a>
+                    <a href='/revenue/'>Revenue  </a>
+                    <a href='/expenses/'>Expenses  </a> 
+                    <br>
+                    <br> 
+                    %s
+                </body>
+            </html>""" % entries
     return HttpResponse(html)
