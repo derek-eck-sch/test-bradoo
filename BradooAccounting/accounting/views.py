@@ -23,8 +23,10 @@ def index(request):
     return HttpResponse(html)
 
 def liquidity(request):
-    model = Liquidity.objects.get(pk=1)
-    entries = model.liquidityBalance
+    model1 = Liquidity.objects.get(pk=1)
+    model2 = Receivables.objects.get(pk=1)
+    model3 = Expenses.objects.get(pk=1)
+    entries = model1.liquidityBalance + model2.receivablesBalance - model3.expensesBalance
     html = """<html>
                 <body> 
                     <h2>Accounting</h2>
@@ -60,8 +62,9 @@ def receivables(request):
     return HttpResponse(html)
 
 def revenue(request):
-    model = Revenue.objects.get(pk=1)
-    entries = model.revenueBalance   
+    model1 = Receivables.objects.get(pk=1)
+    model2 = Expenses.objects.get(pk=1)
+    entries = model1.receivablesBalance - model2.expensesBalance
     html = """<html>
                 <body> 
                     <h2>Accounting</h2>
@@ -81,7 +84,8 @@ def expenses(request):
     model = Expenses.objects.get(pk=1)
     entries = model.expensesBalance
     html = """<html>
-                <body>
+                <body> 
+                    <h2>Accounting</h2
                     <a href='/'>Home  </a>
                     <a href='/liquidity/'>Liquidity  </a>
                     <a href='/receivables/'>Receivables  </a>
