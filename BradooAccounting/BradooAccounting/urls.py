@@ -28,4 +28,6 @@ urlpatterns = [
     
     path('revenue/', views.revenue),
 
+    path('expenses/', views.expenses)
+
 ]

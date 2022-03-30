@@ -1,6 +1,7 @@
+from cgitb import html
+import datetime
 from django.shortcuts import render
 from django.http import HttpResponse
-import datetime
 from accounting.models import Liquidity
 from accounting.models import Receivables
 from accounting.models import Revenue
@@ -13,18 +14,23 @@ def index(request):
     html = "<html><body>It is now %s.</body></html>" % now
     return HttpResponse(html)
 
-def liquidity():
+def liquidity(request):
     all_entries = Liquidity.objects.all()
+    html = "<html><body>%s</body></html>" % all_entries
+    return HttpResponse(html)
 
 
-def receivables():
+def receivables(request):
     all_entries = Receivables.objects.all()
+    html = "<html><body>%s</body></html>" % all_entries
+    return HttpResponse(html)
 
-def revenue():
-    all_entries = Revenue.objects.all()    
+def revenue(request):
+    all_entries = Revenue.objects.all()   
+    html = "<html><body>%s</body></html>" % all_entries
+    return HttpResponse(html) 
 
-def expenses():
+def expenses(request):
     all_entries = Expenses.objects.all()
-
-def transactions():
-    print("helo")
+    html = "<html><body>%s</body></html>" % all_entries
+    return HttpResponse(html)
